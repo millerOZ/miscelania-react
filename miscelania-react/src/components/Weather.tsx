@@ -2,8 +2,24 @@ import { Cloud, CloudRain, Sun, Wind, Droplets } from "lucide-react";
 import { useState } from "react";
 import "spoilerjs/spoiler-span";
 
+/* declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "spoiler-span": any;
+    }
+  }
+} */
+
+interface WeatherInfo {
+  city: string;
+  temp: number;
+  humidity: number;
+  wind: number;
+  code: number;
+}
+
 export const Weather = () => {
-  const [weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState<WeatherInfo | null>(null);
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState("");
 
@@ -45,13 +61,13 @@ export const Weather = () => {
 
     setLoading(false);
   };
-  const getIcon = (code) => {
+  const getIcon = (code: number) => {
     if (code === 0) return <Sun className="w-24 h-24 text-yellow-300" />;
     if (code <= 3) return <Cloud className="w-24 h-24 text-gray-300" />;
     return <CloudRain className="w-24 h-24 text-blue-300" />;
   };
 
-  const getDescription = (code) => {
+  const getDescription = (code: number) => {
     if (code === 0) return "Despejado";
     if (code <= 3) return "Nublado";
     return "Lluvia";
@@ -62,7 +78,7 @@ export const Weather = () => {
       <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center p-6">
         <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
           <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            <spoiler-span> Clima Ecuador</spoiler-span> 🌤️ 
+            {/* <spoiler-span> Clima Ecuador</spoiler-span> 🌤️ */} 
           </h1>
           <div className="flex gap-2 mb-6">
             <input
@@ -93,7 +109,7 @@ export const Weather = () => {
               </div>
 
               <div className="text-6xl font-bold text-gray-800 mb-2">
-                <spoiler-span>{weather.temp}°C</spoiler-span>
+               {/*  <spoiler-span>{weather.temp}°C</spoiler-span> */}
               </div>
 
               <div className="text-xl text-gray-600 mb-6">
